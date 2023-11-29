@@ -6,6 +6,7 @@ body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
+  background-color: azure;
 }
 
 h1 {
@@ -58,17 +59,21 @@ body {
 
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 1px solid rgba(153,153,255, 0.8);
   float: left;
-  font-size: 24px;
+  font-size: 70px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 100px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 100px;
+}
+
+.square:hover {
+  box-shadow: rgba(175, 175, 250, 0.8) 0px 30px 60px -12px inset, rgba(153,153,255, 0.8) 0px 18px 36px -18px inset;
 }
 
 .board-row:after {
@@ -90,6 +95,30 @@ body {
   margin-left: 20px;
 }
 
-.board{
+.board {
   align-items: center;
+}
+
+.optionn {
+  border: none;
+}
+
+.button-1 {
+  color: #fff;
+  border: 3px solid #9999FF;
+  background-image: -webkit-linear-gradient(30deg, #9999FF 50%, transparent 50%);
+  background-image: linear-gradient(30deg, #9999FF 50%, transparent 50%);
+  background-size: 500px;
+  background-repeat: no-repeat;
+  background-position: 0%;
+  -webkit-transition: background 400ms ease-in-out;
+  transition: background 400ms ease-in-out;
+  width: 70px;
+  height: 70px;
+  border-radius: 25%;
+  font-size: xx-large;
+}
+.button-1:hover {
+  background-position: 100%;
+  color: #9999FF;
 }
