@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from 'react';
 import './App.css';
-import Cookies, { useCookies } from 'react-cookie';
+import { CookiesProvider, useCookies } from 'react-cookie';
 function Choice({ bvalue, choiceHandler }: { bvalue: string, choiceHandler: MouseEventHandler }) {
   return (
     <>
@@ -24,18 +24,33 @@ function Board() {
   const [nextS, setNextS] = useState(true);
   const [Boxes, setBoxes] = useState(Array(9).fill(null));
   const [cookies, setCookie] = useCookies(['symbol']);
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var strt = "🦉";
 
   function handleClick(i: number) {
-    const nextBoxes = Boxes.slice();
-    const startS = cookies.get('symbol','/');
-    console.log('startS');
-    nextBoxes[i] = startS;
-    setBoxes(nextBoxes);
-    if (nextS) {
-      nextBoxes[i] = '🦇';
-    } else {
-      nextBoxes[i] = '🦉';
+    if (Boxes[i]) {
+      return;
     }
+    const nextBoxes = Boxes.slice();
+    if (nextS) {
+      nextBoxes[i] = cookies.symbol;
+      if (cookies.symbol === "🦉") {
+        setCookie('symbol', '🦇', { expires: tomorrow });
+      }
+      else {
+        setCookie('symbol', '🦉', { expires: tomorrow });
+      }
+    } else {
+      nextBoxes[i] = cookies.symbol;
+      if (cookies.symbol === "🦇") {
+        setCookie('symbol', '🦉', { expires: tomorrow });
+      }
+      else {
+        setCookie('symbol', '🦇', { expires: tomorrow });
+      }
+    }
+    setBoxes(nextBoxes);
     setNextS(!nextS);
   }
 
@@ -55,7 +70,7 @@ function Board() {
     <>
       <div className='d-flex justify-content-center'>
         <div className='board-row '>
-          <h1>Choose the starting Symbol</h1>
+          <h1 className='Gfont'>CHOOSE THE STARTING SYMBOL</h1>
         </div>
       </div>
       <div className="row">
