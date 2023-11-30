@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import { useCookies } from 'react-cookie';
-import Choice from './Components/ChoiceButtons';
-import Box from './Components/Box';
-import PlayAgain from './Components/Replay';
+import Choice from './CommonComponents/ChoiceButtons';
+import Box from './CommonComponents/Box';
+import PlayAgain from './CommonComponents/Replay';
 
 
 function Board() {
