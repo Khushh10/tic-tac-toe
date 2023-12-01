@@ -76,8 +76,13 @@ function Board() {
       [0, 4, 8],
       [2, 4, 6]
     ];
+
+    // console.clear();
     for (let i = 0; i < wChances.length; i++) {
       const [a, b, c] = wChances[i];
+      if (Boxes[a] && Boxes[a] === Boxes[b] && Boxes[a] === Boxes[c]) {
+        return Boxes[a];
+      }
     }
     return null;
   }
@@ -93,11 +98,8 @@ function Board() {
           <Choice bvalue={'🦇'} choiceHandler={() => choiceClick(1)} />
           <Choice bvalue={'🦉'} choiceHandler={() => choiceClick(2)} />
         </div>
-        <div className="d-flex justify-content-center">
-          <PlayAgain />
-        </div>
-        <div className="d-flex justify-content-center">
-          <p>{decision}</p><br />
+        <div className="button-box d-flex justify-content-center mt-3">
+          <button className="decision">{decision}</button>
         </div>
       </div>
       <div className='d-flex justify-content-center'>
@@ -118,6 +120,9 @@ function Board() {
             <Box value={Boxes[8]} onBoxClick={() => handleClick(8)} />
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-center mt-3">
+        <PlayAgain />
       </div>
     </>
   );

@@ -155,3 +155,11 @@ body {
   font-weight: bolder;
   font-size: xx-large;
 }
+
+.decision {
+  height: auto;
+  width: auto;
+  background: #9999FF;
+  color: #383b3a;
+  box-shadow: 0 3px 5px #777777;
+}
