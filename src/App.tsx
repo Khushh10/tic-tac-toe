@@ -12,6 +12,12 @@ function Board() {
   const [cookies, setCookie] = useCookies(['symbol']);
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  const winS = winner(Boxes);
+  let decision;
+  if (winS) {
+    decision = winS + "WON THE GAME!!!";
+  }
+
 
   function handleClick(i: number) {
     if (cookies.symbol === undefined) {
@@ -21,7 +27,7 @@ function Board() {
       return;
     }
     else {
-      if (Boxes[i]) {
+      if (Boxes[i] || winner(Boxes)) {
         return;
       }
       const nextBoxes = Boxes.slice();
@@ -59,6 +65,22 @@ function Board() {
     }
   }
 
+  function winner(Boxes: Array<number>) {
+    const wChances = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < wChances.length; i++) {
+      const [a, b, c] = wChances[i];
+    }
+    return null;
+  }
   return (
     <>
       <div className='d-flex justify-content-center'>
@@ -72,7 +94,10 @@ function Board() {
           <Choice bvalue={'🦉'} choiceHandler={() => choiceClick(2)} />
         </div>
         <div className="d-flex justify-content-center">
-          <PlayAgain/>
+          <PlayAgain />
+        </div>
+        <div className="d-flex justify-content-center">
+          <p>{decision}</p><br />
         </div>
       </div>
       <div className='d-flex justify-content-center'>
