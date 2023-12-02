@@ -158,8 +158,16 @@ body {
 
 .decision {
   height: auto;
-  width: auto;
+  width: 20%;
   background: #9999FF;
   color: #383b3a;
-  box-shadow: 0 3px 5px #777777;
+  box-shadow: inherit #777777;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  letter-spacing: 2px;
+  font-weight: bolder;
+  font-size: 120%;
+}
+
+.borderN{
+  border: none;
 }

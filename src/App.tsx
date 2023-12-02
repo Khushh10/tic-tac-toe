@@ -4,22 +4,29 @@ import { useCookies } from 'react-cookie';
 import Choice from './CommonComponents/ChoiceButtons';
 import Box from './CommonComponents/Box';
 import PlayAgain from './CommonComponents/Replay';
-
-
 function Board() {
   const [nextS, setNextS] = useState(true);
   const [Boxes, setBoxes] = useState(Array(9).fill(null));
   const [cookies, setCookie] = useCookies(['symbol']);
-  var tomorrow = new Date();
+  let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
   const winS = winner(Boxes);
   let decision;
   if (winS) {
     decision = winS + "WON THE GAME!!!";
   }
-
+  else {
+    if (Boxes.includes(null)) {
+      console.log("Continuing");
+    }
+    else {
+      decision = "ITS A TIE!";
+    }
+  }
 
   function handleClick(i: number) {
+    // console.log("tomorrow", tomorrow);
+
     if (cookies.symbol === undefined) {
       console.log("Undefined, taking 🦉 as start.");
       setCookie('symbol', '🦇', { expires: tomorrow });
@@ -35,6 +42,7 @@ function Board() {
         nextBoxes[i] = cookies.symbol;
         if (cookies.symbol === "🦉") {
           setCookie('symbol', '🦇', { expires: tomorrow });
+          console.log(tomorrow);
         }
         else {
           setCookie('symbol', '🦉', { expires: tomorrow });
@@ -57,11 +65,16 @@ function Board() {
     if (i === 1) {
       console.log("CROSS");
       setCookie('symbol', '🦇');
+      Boxes.fill(null);
+      alert("🦇 is selected");
+
     }
 
     else {
       console.log("ZERO");
       setCookie('symbol', '🦉');
+      Boxes.fill(null);
+      alert("🦉 is selected");
     }
   }
 
@@ -78,8 +91,8 @@ function Board() {
     ];
 
     // console.clear();
-    for (let i = 0; i < wChances.length; i++) {
-      const [a, b, c] = wChances[i];
+    for (const element of wChances) {
+      const [a, b, c] = element;
       if (Boxes[a] && Boxes[a] === Boxes[b] && Boxes[a] === Boxes[c]) {
         return Boxes[a];
       }
@@ -99,9 +112,9 @@ function Board() {
           <Choice bvalue={'🦉'} choiceHandler={() => choiceClick(2)} />
         </div>
         <div className="button-box d-flex justify-content-center mt-3">
-          <button className="decision">{decision}</button>
+          <button className='borderN decision'>{decision}</button>
         </div>
-      </div>
+      </div >
       <div className='d-flex justify-content-center'>
         <div className="mt-3 pt-3">
           <div className="board-row">
@@ -121,8 +134,10 @@ function Board() {
           </div>
         </div>
       </div>
-      <div className="d-flex justify-content-center mt-3">
-        <PlayAgain />
+      <div className="row">
+        <div className="d-flex justify-content-center mt-3">
+          <PlayAgain />
+        </div>
       </div>
     </>
   );
